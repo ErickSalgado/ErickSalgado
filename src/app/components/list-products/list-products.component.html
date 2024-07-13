@@ -62,57 +62,9 @@
                 {{ option }}
               </option>
             </select>
-            <!--(change)="onItemsPerPageChange(($event.target as HTMLSelectElement).value)" <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange($event.target.value)">
-            <option *ngFor="let option of [5, 10, 15, 20]" [value]="option">{{ option }}</option>
-          </select> -->
           </div>
-          <!-- <div class="divCont">
-
-          </div>
-          <p>{{ filteredProducts.length }} Resultados</p>
-          <label for="itemsPerPage">Resultados por página: </label> -->
-          <!-- <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange($event.target.value)">
-            <option *ngFor="let option of [5, 10, 15, 20]" [value]="option">{{ option }}</option>
-          </select> -->
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!--
-<div class="container">
-  <h2>BANCO</h2>
-  <div class="search-bar">
-    <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search..." />
-  </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Logo</th>
-        <th>Nombre del producto</th>
-        <th>Descripción</th>
-        <th>Fecha de liberación</th>
-        <th>Fecha de reestructuración</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of filteredProducts | slice: 0:itemsPerPage">
-        <td>
-          <img [src]="product.logo" alt="Logo" class="product-logo" />
-        </td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td>{{ product.date_release | date: 'dd/MM/yyyy' }}</td>
-        <td>{{ product.date_revision | date: 'dd/MM/yyyy' }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="pagination">
-    <label for="itemsPerPage">Resultados por página: </label>
-     <select id="itemsPerPage" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange($event.target.value)">
-      <option *ngFor="let option of [5, 10, 15, 20]" [value]="option">{{ option }}</option>
-    </select> 
-  </div>
-  <p>{{ filteredProducts.length }} Resultados</p>
-</div>-->
