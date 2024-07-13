@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans';
+}
+
+header {
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: #003366; */
+  color: #252440 !important;
+  background-color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 0;
+  margin: -10px;
+}
+
+/* Contenedor principal */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* section.body {
+  background-color: #ebeaea;
+  padding: 0px;
+} */
+/* body {
+  background-color: #ebeaea;
+  padding: 0px;
+} */
+
+/* Barra de búsqueda */
+.search-bar {
+  flex-grow: 1;
+}
+
+.search-bar input {
+  width: 30%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  justify-content: left;
+}
+
+.card {
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 20px 20px;  
+}
+
+.card-body {
+  overflow-x: auto;
+}
+
+
+/* Botón de crear producto */
+.create-product-button button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-product-button button:hover {
+  background-color: #0056b3;
+}
+
+/* Tabla de productos */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 13px;  
+}
+
+.table-logo{
+  width: 10%; 
+  text-align: center;
+  align-items: center;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+tbody {
+  background-color: #fff;
+}
+
+.div-cont-logo{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Logo del producto */
+.product-logo {
+  width: 40px;
+  height: 40px;
+  background-color: #ddd;
+  border-radius: 50%;
+  font-weight: bold;
+  color: #555;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.pagination select {
+  text-align: center;
+  font-size: small;
+  width: 20%;
+}
+
+p {  
+  font-size: 14px;
+  color: #666;
+}
+
+.left, .right {
+  width: 50%;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
