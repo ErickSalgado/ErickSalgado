@@ -1,0 +1,31 @@
+.bank-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 76px;
+    padding: 0 24px;
+    background-color: var(--color-bg-surface);
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.bank-header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-brand-navy);
+    text-decoration: none;
+}
+
+.bank-header__icon {
+    width: 34px;
+    height: 26px;
+    flex-shrink: 0;
+}
+
+.bank-header__title {
+    font-family: var(--font-serif-brand);
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1;
+}
