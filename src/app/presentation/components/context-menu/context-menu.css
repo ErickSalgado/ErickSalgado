@@ -1,0 +1,61 @@
+.context-menu {
+    position: relative;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.context-menu__trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.context-menu__trigger:hover {
+    background-color: var(--color-secondary-bg);
+    color: var(--color-brand-navy);
+}
+
+.context-menu__dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 30;
+    min-width: 136px;
+    padding: 6px 0;
+    margin-top: 4px;
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-dropdown);
+}
+
+.context-menu__item {
+    display: block;
+    width: 100%;
+    padding: 9px 16px;
+    border: none;
+    background: transparent;
+    color: var(--color-text-primary);
+    font-size: 13px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+}
+
+.context-menu__item:hover {
+    background-color: var(--color-bg-header-row);
+    color: var(--color-brand-navy);
+}
+
+.context-menu__item--danger:hover {
+    background-color: var(--color-error-bg);
+    color: var(--color-error);
+}

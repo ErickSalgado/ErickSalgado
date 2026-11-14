@@ -1,0 +1,22 @@
+<div class="context-menu">
+    <button type="button" class="context-menu__trigger" [attr.aria-expanded]="isOpen()" aria-haspopup="menu"
+        [attr.aria-label]="'Acciones para ' + productName()" (click)="toggleMenu()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <circle cx="8" cy="3" r="1.4" />
+            <circle cx="8" cy="8" r="1.4" />
+            <circle cx="8" cy="13" r="1.4" />
+        </svg>
+    </button>
+
+    @if (isOpen()) {
+    <div class="context-menu__dropdown" role="menu">
+        <button type="button" class="context-menu__item" role="menuitem" (click)="onEdit()">
+            Editar
+        </button>
+        <button type="button" class="context-menu__item context-menu__item--danger" role="menuitem"
+            (click)="onDelete()">
+            Eliminar
+        </button>
+    </div>
+    }
+</div>
