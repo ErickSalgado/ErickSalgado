@@ -1,31 +1,31 @@
 .bank-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 76px;
-    padding: 0 24px;
-    background-color: var(--color-bg-surface);
-    border-bottom: 1px solid var(--color-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4.75rem;
+  padding: 0 1.5rem;
+  background-color: var(--color-bg-surface);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .bank-header__brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--color-brand-navy);
-    text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-brand-navy);
+  text-decoration: none;
 }
 
 .bank-header__icon {
-    width: 34px;
-    height: 26px;
-    flex-shrink: 0;
+  width: 2.125rem;
+  height: 1.625rem;
+  flex-shrink: 0;
 }
 
 .bank-header__title {
-    font-family: var(--font-serif-brand);
-    font-size: 23px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    line-height: 1;
+  font-family: var(--font-serif-brand);
+  font-size: 1.4375rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1;
 }

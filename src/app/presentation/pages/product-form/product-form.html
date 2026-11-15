@@ -1,0 +1,133 @@
+<section class="form-page">
+  <div class="form-page__back">
+    <a routerLink="/products" class="form-page__back-link">&larr; Volver al listado</a>
+  </div>
+
+  <div class="card form-card">
+    <header class="form-card__header">
+      <h1 class="form-card__title">{{ pageTitle() }}</h1>
+    </header>
+
+    @if (facade.isLoading()) {
+      <div class="form-card__state" aria-live="polite">Cargando información del producto...</div>
+    } @else if (isNotFound()) {
+      <div class="form-card__state">
+        <p>No se encontró el producto solicitado.</p>
+        <a routerLink="/products" class="btn btn--primary">Regresar al listado</a>
+      </div>
+    } @else {
+      <form class="product-form" [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="product-form__grid">
+          <div class="form-field">
+            <label class="form-field__label" for="product-id">ID</label>
+            <input
+              id="product-id"
+              type="text"
+              class="field-input"
+              [class.field-input--error]="hasFieldError('id')"
+              formControlName="id"
+              autocomplete="off"
+            />
+            @if (isIdVerificationPending()) {
+              <span class="form-field__hint">Verificando disponibilidad...</span>
+            } @else if (getFieldErrorMessage('id'); as errorMsg) {
+              <span class="form-field__error" role="alert">{{ errorMsg }}</span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="product-name">Nombre</label>
+            <input
+              id="product-name"
+              type="text"
+              class="field-input"
+              [class.field-input--error]="hasFieldError('name')"
+              formControlName="name"
+            />
+            @if (getFieldErrorMessage('name'); as errorMsg) {
+              <span class="form-field__error" role="alert">{{ errorMsg }}</span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="product-description">Descripción</label>
+            <input
+              id="product-description"
+              type="text"
+              class="field-input"
+              [class.field-input--error]="hasFieldError('description')"
+              formControlName="description"
+            />
+            @if (getFieldErrorMessage('description'); as errorMsg) {
+              <span class="form-field__error" role="alert">{{ errorMsg }}</span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="product-logo">Logo</label>
+            <input
+              id="product-logo"
+              type="text"
+              class="field-input"
+              [class.field-input--error]="hasFieldError('logo')"
+              formControlName="logo"
+            />
+            @if (getFieldErrorMessage('logo'); as errorMsg) {
+              <span class="form-field__error" role="alert">{{ errorMsg }}</span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="product-release-date">Fecha Liberación</label>
+            <input
+              id="product-release-date"
+              type="date"
+              class="field-input"
+              [class.field-input--error]="hasFieldError('releaseDate')"
+              [min]="todayIsoDate"
+              formControlName="releaseDate"
+            />
+            @if (getFieldErrorMessage('releaseDate'); as errorMsg) {
+              <span class="form-field__error" role="alert">{{ errorMsg }}</span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label form-field__label--muted" for="product-revision-date">
+              Fecha Revisión
+            </label>
+            <input
+              id="product-revision-date"
+              type="date"
+              class="field-input"
+              [class.field-input--error]="hasFieldError('revisionDate')"
+              formControlName="revisionDate"
+            />
+            @if (getFieldErrorMessage('revisionDate'); as errorMsg) {
+              <span class="form-field__error" role="alert">{{ errorMsg }}</span>
+            }
+          </div>
+        </div>
+
+        <div class="product-form__actions">
+          <button
+            type="button"
+            class="btn btn--secondary product-form__action-btn"
+            [disabled]="facade.isSubmitting()"
+            (click)="onReset()"
+          >
+            Reiniciar
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn--primary product-form__action-btn"
+            [disabled]="productForm.invalid || productForm.pending || facade.isSubmitting()"
+          >
+            {{ facade.isSubmitting() ? 'Enviando...' : 'Enviar' }}
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+</section>

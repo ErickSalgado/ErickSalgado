@@ -1,0 +1,116 @@
+<section class="products-page">
+    <div class="products-toolbar">
+        <input type="search" class="field-input products-toolbar__search" placeholder="Search.."
+            aria-label="Buscar productos financieros" [value]="facade.searchTerm()" (input)="onSearchInput($event)" />
+
+        <a routerLink="/products/new" class="btn btn--primary">Agregar</a>
+    </div>
+
+    <div class="card products-card">
+        @if (facade.isLoading()) {
+        <app-table-skeleton [rowCount]="facade.pageSize()" />
+        } @else if (facade.paginatedProducts().length === 0) {
+        <div class="products-empty">
+            @if (facade.searchTerm().trim()) {
+            <p class="products-empty__title">
+                No se encontraron productos para "{{ facade.searchTerm().trim() }}".
+            </p>
+            } @else {
+            <p class="products-empty__title">No existen productos financieros registrados.</p>
+            <a routerLink="/products/new" class="btn btn--primary">Agregar producto</a>
+            }
+        </div>
+        } @else {
+        <div class="table-wrapper">
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th class="products-table__col-logo">Logo</th>
+                        <th>Nombre del producto</th>
+                        <th>
+                            <span class="header-with-info">
+                                Descripción
+                                <span class="info-badge" tabindex="0"
+                                    data-tooltip="Descripción general de los beneficios del producto"
+                                    aria-label="Información sobre descripción">
+                                    i
+                                </span>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="header-with-info">
+                                Fecha de liberación
+                                <span class="info-badge" tabindex="0"
+                                    data-tooltip="Fecha en la que el producto se libera al público"
+                                    aria-label="Información sobre fecha de liberación">
+                                    i
+                                </span>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="header-with-info">
+                                Fecha de reestructuración
+                                <span class="info-badge" tabindex="0"
+                                    data-tooltip="Fecha de revisión para cambiar términos y condiciones"
+                                    aria-label="Información sobre fecha de reestructuración">
+                                    i
+                                </span>
+                            </span>
+                        </th>
+                        <th class="products-table__col-actions" aria-label="Acciones"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (product of facade.paginatedProducts(); track product.id) {
+                    <tr>
+                        <td class="products-table__col-logo">
+                            <app-product-logo [logoUrl]="product.logo" [productName]="product.name" />
+                        </td>
+                        <td class="products-table__name">{{ product.name }}</td>
+                        <td class="products-table__description">{{ product.description }}</td>
+                        <td>{{ product.releaseDate | calendarDate }}</td>
+                        <td>{{ product.revisionDate | calendarDate }}</td>
+                        <td class="products-table__col-actions">
+                            <app-context-menu [productName]="product.name" (editClicked)="onEditProduct(product.id)"
+                                (deleteClicked)="onRequestDelete(product)" />
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+
+        <footer class="products-footer">
+            <span class="products-footer__count">{{ resultsSummaryText() }}</span>
+
+            @if (facade.totalPages() > 1) {
+            <nav class="products-pagination" aria-label="Paginación de productos">
+                <button type="button" class="products-pagination__btn" [disabled]="facade.currentPage() <= 1"
+                    (click)="onPreviousPage()">
+                    Anterior
+                </button>
+                <span class="products-pagination__info">
+                    Página {{ facade.currentPage() }} de {{ facade.totalPages() }}
+                </span>
+                <button type="button" class="products-pagination__btn"
+                    [disabled]="facade.currentPage() >= facade.totalPages()" (click)="onNextPage()">
+                    Siguiente
+                </button>
+            </nav>
+            }
+
+            <select class="products-footer__select" aria-label="Cantidad de registros por página"
+                [value]="facade.pageSize()" (change)="onPageSizeChange($event)">
+                @for (sizeOption of pageSizeOptions; track sizeOption) {
+                <option [value]="sizeOption" [selected]="facade.pageSize() === sizeOption">
+                    {{ sizeOption }}
+                </option>
+                }
+            </select>
+        </footer>
+    </div>
+
+    <app-confirm-modal [isOpen]="productPendingDelete() !== null" [message]="deleteConfirmationMessage()"
+        [isProcessing]="facade.isSubmitting()" (cancelled)="onCancelDelete()" (confirmed)="onConfirmDelete()" />
+</section>

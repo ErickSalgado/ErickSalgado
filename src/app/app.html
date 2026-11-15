@@ -1,4 +1,13 @@
 <app-header />
+
+@if (facade.notification(); as notification) {
+  <app-alert-banner
+    [type]="notification.type"
+    [message]="notification.message"
+    (dismissed)="facade.clearNotification()"
+  />
+}
+
 <main class="app-main">
   <router-outlet />
 </main>

@@ -1,7 +1,19 @@
-<div class="alert-banner" role="alert" aria-live="assertive">
-    <span class="alert-banner__icon" aria-hidden="true">!</span>
-    <p class="alert-banner__message">{{ message() }}</p>
-    <button type="button" class="alert-banner__close" aria-label="Cerrar mensaje de error" (click)="onDismiss()">
-        &times;
-    </button>
+<div
+  class="alert-banner"
+  [class.alert-banner--success]="type() === 'success'"
+  [attr.role]="type() === 'error' ? 'alert' : 'status'"
+  [attr.aria-live]="type() === 'error' ? 'assertive' : 'polite'"
+>
+  <span class="alert-banner__icon" aria-hidden="true">
+    {{ type() === 'success' ? '✓' : '!' }}
+  </span>
+  <p class="alert-banner__message">{{ message() }}</p>
+  <button
+    type="button"
+    class="alert-banner__close"
+    aria-label="Cerrar notificación"
+    (click)="onDismiss()"
+  >
+    &times;
+  </button>
 </div>

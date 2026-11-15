@@ -260,4 +260,44 @@ describe('FinancialProductFacade', () => {
     expect(actionResult).toBe(false);
     expect(facade.errorMessage()).toBe('No existe para eliminar');
   });
+
+  it('should auto-dismiss success toast after 3s, error toast after 6s, and keep success across loadProducts', () => {
+    jest.useFakeTimers();
+
+    try {
+      const sampleProduct = buildSampleProducts(1)[0];
+      repositoryMock.create.mockReturnValue(of(sampleProduct));
+      repositoryMock.getAll.mockReturnValue(of([sampleProduct]));
+
+      facade.createProduct(sampleProduct).subscribe();
+      expect(facade.notification()).toEqual({
+        type: 'success',
+        message: 'Producto creado correctamente.',
+      });
+
+      facade.loadProducts();
+      expect(facade.notification()?.type).toBe('success');
+
+      jest.advanceTimersByTime(2999);
+      expect(facade.notification()).not.toBeNull();
+
+      jest.advanceTimersByTime(1);
+      expect(facade.notification()).toBeNull();
+
+      repositoryMock.getAll.mockReturnValue(throwError(() => new AppError(500, 'Fallo temporal')));
+      facade.loadProducts();
+      expect(facade.notification()).toEqual({
+        type: 'error',
+        message: 'Fallo temporal',
+      });
+
+      jest.advanceTimersByTime(5999);
+      expect(facade.notification()).not.toBeNull();
+
+      jest.advanceTimersByTime(1);
+      expect(facade.notification()).toBeNull();
+    } finally {
+      jest.useRealTimers();
+    }
+  });
 });

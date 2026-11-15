@@ -5,7 +5,7 @@ import { catchError, map, Observable, of, switchMap, timer } from 'rxjs';
 export const PRODUCT_VALIDATION_RULES = {
   idMinLength: 3,
   idMaxLength: 10,
-  nameMinLength: 5,
+  nameMinLength: 6,
   nameMaxLength: 100,
   descriptionMinLength: 10,
   descriptionMaxLength: 200,
@@ -38,7 +38,9 @@ export const addOneYearToIsoDate = (isoDate: string): string => {
   return `${nextYear}-${padTwoDigits(monthPart)}-${padTwoDigits(adjustedDay)}`;
 };
 
-export const minTodayDateValidator = (referenceDateProvider: () => Date = () => new Date()): ValidatorFn => {
+export const minTodayDateValidator = (
+  referenceDateProvider: () => Date = () => new Date(),
+): ValidatorFn => {
   return (control: AbstractControl): ValidationErrors | null => {
     const rawValue = typeof control.value === 'string' ? control.value.trim() : '';
     if (!rawValue) {

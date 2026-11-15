@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { NotificationType } from '../../../application/facades/financial-product.facade';
 
 @Component({
   selector: 'app-alert-banner',
@@ -9,6 +10,7 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 })
 export class AlertBanner {
   readonly message = input.required<string>();
+  readonly type = input<NotificationType>('error');
   readonly dismissed = output<void>();
 
   onDismiss(): void {

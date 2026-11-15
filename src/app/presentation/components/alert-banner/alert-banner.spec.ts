@@ -22,6 +22,17 @@ describe('AlertBanner', () => {
     expect(compiled.textContent).toContain('Error al cargar los productos');
   });
 
+  it('should render success styling when type is success', () => {
+    fixture.componentRef.setInput('type', 'success');
+    fixture.componentRef.setInput('message', 'Producto creado correctamente.');
+    fixture.detectChanges();
+
+    const banner = fixture.nativeElement.querySelector('.alert-banner') as HTMLElement;
+    expect(banner.classList.contains('alert-banner--success')).toBe(true);
+    expect(banner.getAttribute('role')).toBe('status');
+    expect(banner.textContent).toContain('Producto creado correctamente.');
+  });
+
   it('should emit dismissed when close button is clicked', () => {
     const dismissedSpy = jest.fn();
     component.dismissed.subscribe(dismissedSpy);
